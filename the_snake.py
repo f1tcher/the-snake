@@ -1,4 +1,5 @@
 from random import randint
+
 import pygame
 
 # Константы для размеров поля и сетки:
@@ -32,7 +33,7 @@ SPEED = 20
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 
 # Заголовок окна игрового поля:
-pygame.display.set_caption("Змейка")
+pygame.display.set_caption('Змейка')
 
 # Настройка времени:
 clock = pygame.time.Clock()
@@ -68,7 +69,7 @@ class Apple(GameObject):
                 self.position = position
                 return
 
-        raise RuntimeError("Не удалось разместить яблоко")
+        raise RuntimeError('Не удалось разместить яблоко')
 
     def draw(self):
         """Метод, отвечающий за отрисовку яблока"""
@@ -189,5 +190,5 @@ def main():
         pygame.display.update()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
