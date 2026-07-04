@@ -1,8 +1,8 @@
 from random import randint
 
+import sys
 import pygame as pg
 
-import sys
 
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -72,7 +72,7 @@ class Apple(GameObject):
                 self.position = position
                 return
 
-        raise RuntimeError('Не удалось разместить яблоко')
+        raise RuntimeError('Не удалось разместить яблоко.')
 
     def draw(self):
         """Метод, отвечающий за отрисовку яблока."""
