@@ -168,8 +168,12 @@ def main():
             snake.length += 1
 
         if snake.get_head_position() in snake.positions[1:]:
-            screen.fill(BOARD_BACKGROUND_COLOR)
             snake.reset()
+            screen.fill(BOARD_BACKGROUND_COLOR)
+            snake.draw(screen)
+            apple.draw(screen)
+            pygame.display.update()
+            continue
 
         snake.draw()
         apple.draw()
