@@ -161,8 +161,8 @@ def main():
         snake.move()
 
         if snake.get_head_position() == apple.position:
-            snake.length += 1
             apple.randomize_position()
+            snake.length += 1
 
         if snake.get_head_position() in snake.positions[1:]:
             screen.fill(BOARD_BACKGROUND_COLOR)
