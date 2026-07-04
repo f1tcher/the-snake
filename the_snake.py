@@ -58,14 +58,16 @@ class Apple(GameObject):
         self.randomize_position()
 
     def randomize_position(self, positions=None):
-        '''Метод, отвечающий за рандомизацию позиции яблока'''
-        while True:
+        max_attempts = 1000  # Лимит попыток
+        for _ in range(max_attempts):
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
             y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
             position = (x, y)
             if positions is None or position not in positions:
-                break
-        self.position = position
+                self.position = position
+                return
+
+        raise RuntimeError("Не удалось разместить яблоко")
 
     def draw(self):
         '''Метод, отвечающий за отрисовку яблока'''
