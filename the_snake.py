@@ -27,7 +27,7 @@ APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
 # Скорость движения змейки:
-SPEED = 10
+SPEED = 20
 
 # Настройка игрового окна:
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -59,13 +59,13 @@ class Apple(GameObject):
 
     def randomize_position(self, positions=None):
         '''Метод, отвечающий за рандомизацию позиции яблока'''
-        x = randint(0, GRID_WIDTH - GRID_SIZE) * GRID_SIZE
-        y = randint(0, GRID_HEIGHT - GRID_SIZE) * GRID_SIZE
+        x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
+        y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
         position = (x, y)
         if positions is not None:
             while position in positions:
-                x = randint(0, GRID_WIDTH) * GRID_SIZE
-                y = randint(0, GRID_HEIGHT) * GRID_SIZE
+                x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
+                y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
                 position = (x, y)
         self.position = position
 
