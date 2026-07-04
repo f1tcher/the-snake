@@ -27,7 +27,7 @@ APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
 # Скорость движения змейки:
-SPEED = 20
+SPEED = 10
 
 # Настройка игрового окна:
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -57,12 +57,17 @@ class Apple(GameObject):
         super().__init__(APPLE_COLOR)
         self.randomize_position()
 
-    def randomize_position(self):
+    def randomize_position(self, positions=None):
         '''Метод, отвечающий за рандомизацию позиции яблока'''
-        self.position = (
-            randint(0, GRID_WIDTH) * GRID_SIZE,
-            randint(0, GRID_HEIGHT) * GRID_SIZE
-        )
+        x = randint(0, GRID_WIDTH - GRID_SIZE) * GRID_SIZE
+        y = randint(0, GRID_HEIGHT - GRID_SIZE) * GRID_SIZE
+        position = (x, y)
+        if positions is not None:
+            while position in positions:
+                x = randint(0, GRID_WIDTH) * GRID_SIZE
+                y = randint(0, GRID_HEIGHT) * GRID_SIZE
+                position = (x, y)
+        self.position = position
 
     def draw(self):
         '''Метод, отвечающий за отрисовку яблока'''
@@ -161,7 +166,7 @@ def main():
         snake.move()
 
         if snake.get_head_position() == apple.position:
-            apple.randomize_position()
+            apple.randomize_position(snake.positions)
             snake.length += 1
 
         if snake.get_head_position() in snake.positions[1:]:
