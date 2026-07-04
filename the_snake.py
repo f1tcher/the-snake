@@ -1,7 +1,6 @@
 from random import randint
 import pygame
 
-
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
@@ -47,6 +46,7 @@ class GameObject:
         self.body_color = body_color
 
     def draw(self):
+        """Метод заглушка"""
         pass
 
 
@@ -58,6 +58,7 @@ class Apple(GameObject):
         self.randomize_position()
 
     def randomize_position(self, positions=None):
+        """Метод для рандома позиции яблока"""
         max_attempts = 1000  # Лимит попыток
         for _ in range(max_attempts):
             x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
@@ -156,6 +157,7 @@ def handle_keys(game_object):
 
 
 def main():
+    """Основная функция"""
     pygame.init()
 
     snake = Snake()
