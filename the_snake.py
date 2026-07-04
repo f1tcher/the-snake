@@ -1,4 +1,4 @@
-from random import randint
+from random import choice, randint
 import pygame
 
 
@@ -59,14 +59,12 @@ class Apple(GameObject):
 
     def randomize_position(self, positions=None):
         '''Метод, отвечающий за рандомизацию позиции яблока'''
-        x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
-        y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
-        position = (x, y)
-        if positions is not None:
-            while position in positions:
-                x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
-                y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
-                position = (x, y)
+        while True:
+            x = randint(0, GRID_WIDTH - 1) * GRID_SIZE
+            y = randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+            position = (x, y)
+            if positions is None or position not in positions:
+                break
         self.position = position
 
     def draw(self):
