@@ -1,5 +1,6 @@
 import sys
 from random import randint
+
 import pygame as pg
 
 # Константы для размеров поля и сетки:
