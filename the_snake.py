@@ -113,10 +113,9 @@ class Snake(GameObject):
         )
 
         if len(self.positions) > self.length:
-            if GRID_WIDTH * GRID_HEIGHT == self.lenght:
-                self.last = None
-            else:
             self.last = self.positions.pop()
+        else:
+            self.last = None
 
     def update_direction(self):
         """Метод, изменяющий напрвление движения змейки."""
