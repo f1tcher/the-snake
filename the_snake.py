@@ -51,6 +51,12 @@ class GameObject:
     def draw(self):
         """Метод заглушка."""
 
+    def draw_rect(self, position):
+        """Метод отрисовки клетки."""
+        rect = pg.Rect(position, (GRID_SIZE, GRID_SIZE))
+        pg.draw.rect(screen, self.body_color, rect)
+        pg.draw.rect(screen, BORDER_COLOR, rect, 1)
+
 
 class Apple(GameObject):
     """Класс игрового объекта яблоко."""
@@ -75,9 +81,7 @@ class Apple(GameObject):
 
     def draw(self):
         """Метод, отвечающий за отрисовку яблока."""
-        rect = pg.Rect(self.position, (GRID_SIZE, GRID_SIZE))
-        pg.draw.rect(screen, self.body_color, rect)
-        pg.draw.rect(screen, BORDER_COLOR, rect, 1)
+        self.draw_rect(self.position)
 
 
 class Snake(GameObject):
@@ -120,15 +124,9 @@ class Snake(GameObject):
     def draw(self):
         """Метод, отрисовывабщий змейку."""
         for position in self.positions[:-1]:
-            rect = pg.Rect(position, (GRID_SIZE, GRID_SIZE))
-            pg.draw.rect(screen, self.body_color, rect)
-            pg.draw.rect(screen, BORDER_COLOR, rect, 1)
-
+            self.draw_rect(position)
         # Отрисовка головы змейки
-        head_rect = pg.Rect(self.get_head_position(), (GRID_SIZE, GRID_SIZE))
-        pg.draw.rect(screen, self.body_color, head_rect)
-        pg.draw.rect(screen, BORDER_COLOR, head_rect, 1)
-
+        self.draw_rect(self.get_head_position())
         # Затирание последнего сегмента
         if self.last:
             last_rect = pg.Rect(self.last, (GRID_SIZE, GRID_SIZE))
@@ -164,8 +162,8 @@ def main():
     """Основная функция."""
     pg.init()
 
-    snake = Snake(body_color=SNAKE_COLOR, lenght=10)
-    apple = Apple(body_color=APPLE_COLOR)
+    snake = Snake()
+    apple = Apple()
 
     while True:
         clock.tick(SPEED)
@@ -181,6 +179,7 @@ def main():
 
             snake.reset()
             screen.fill(BOARD_BACKGROUND_COLOR)
+            apple.randomize_position()
 
         elif snake.get_head_position() == apple.position:
             apple.randomize_position(snake.positions)
