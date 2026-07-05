@@ -113,6 +113,9 @@ class Snake(GameObject):
         )
 
         if len(self.positions) > self.length:
+            if GRID_WIDTH * GRID_HEIGHT == self.lenght:
+                self.last = None
+            else:
             self.last = self.positions.pop()
 
     def update_direction(self):
@@ -173,13 +176,13 @@ def main():
         snake.update_direction()
         snake.move()
 
-        if snake.get_head_position() in snake.positions[3:]:
+        if snake.get_head_position() in snake.positions[4:]:
             with open('scores.txt', 'a', encoding='utf-8') as f:
                 f.write(f'Счёт {snake.length}')
 
             snake.reset()
             screen.fill(BOARD_BACKGROUND_COLOR)
-            apple.randomize_position()
+            apple.randomize_position(snake.positions)
 
         elif snake.get_head_position() == apple.position:
             apple.randomize_position(snake.positions)
